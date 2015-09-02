@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package push.mysimplevkdownloader;
+package push.simplevkdownloader;
 
-import push.mysimplevkdownloader.vkapi.VkApiController;
+import push.simplevkdownloader.vkapi.VkApiController;
 
 /**
  *
  * @author push
  */
-public class MySimpleVkDownloader {
+public class SimpleVkDownloader {
 
     /**
      * @param args the command line arguments

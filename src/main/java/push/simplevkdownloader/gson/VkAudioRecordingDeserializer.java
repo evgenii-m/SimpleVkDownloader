@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package push.mysimplevkdownloader.gson;
+package push.simplevkdownloader.gson;
 
 import com.google.gson.*;
 import java.lang.reflect.Type;
-import push.mysimplevkdownloader.model.VkAudioRecording;
+import push.simplevkdownloader.model.VkAudioRecording;
 
 /**
  *

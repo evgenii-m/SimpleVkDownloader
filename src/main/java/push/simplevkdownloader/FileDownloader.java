@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package push.mysimplevkdownloader;
+package push.simplevkdownloader;
 
 import java.io.IOException;
 import java.io.InputStream;

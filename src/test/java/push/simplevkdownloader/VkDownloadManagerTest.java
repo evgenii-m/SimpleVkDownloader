@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package push.mysimplevkdownloader;
+package push.simplevkdownloader;
 
+import push.simplevkdownloader.VkDownloadManager;
 import com.google.gson.*;
 import java.io.FileReader;
 import java.nio.file.Files;
@@ -13,7 +14,7 @@ import java.nio.file.Paths;
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 import org.testng.annotations.*;
-import push.mysimplevkdownloader.vkapi.VkApiController;
+import push.simplevkdownloader.vkapi.VkApiController;
 
 /**
  *

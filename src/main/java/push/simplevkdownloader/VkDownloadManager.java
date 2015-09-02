@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package push.mysimplevkdownloader;
+package push.simplevkdownloader;
 
+import push.simplevkdownloader.model.VkAudioRecording;
+import push.simplevkdownloader.model.VkWallData;
 import com.google.gson.*;
 import java.io.IOException;
 import java.net.URL;
@@ -17,9 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.xml.ws.http.HTTPException;
-import push.mysimplevkdownloader.gson.VkWallDataDeserializer;
-import push.mysimplevkdownloader.model.*;
-import push.mysimplevkdownloader.vkapi.VkApiController;
+import push.simplevkdownloader.gson.VkWallDataDeserializer;
+import push.simplevkdownloader.vkapi.VkApiController;
 
 /**
  *
