@@ -5,14 +5,7 @@
  */
 package push.mysimplevkdownloader;
 
-import com.google.gson.*;
 import push.mysimplevkdownloader.vkapi.VkApiController;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.ws.http.HTTPException;
-import push.mysimplevkdownloader.gson.VkWallDataDeserializer;
-import push.mysimplevkdownloader.model.VkWallData;
 
 /**
  *
@@ -25,16 +18,9 @@ public class MySimpleVkDownloader {
      */
     public static void main(String[] args) {
         VkApiController vkApiController = new VkApiController();
-        try {
-            JsonElement vkWallDataJson = vkApiController.getWallDataById("-31608969_17718", true);
-            Gson gson = new GsonBuilder().registerTypeAdapter(
-                    VkWallData.class, new VkWallDataDeserializer()).create();
-            VkWallData vkWallData = gson.fromJson(vkWallDataJson, VkWallData.class);
-            System.out.println("Great!");
-        } catch (IOException ex) {
-            Logger.getLogger(MySimpleVkDownloader.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (HTTPException ex) {
-            Logger.getLogger(MySimpleVkDownloader.class.getName()).log(Level.SEVERE, null, ex);
+        VkDownloadManager vkDownloadManager = new VkDownloadManager(vkApiController);
+        for (String arg : args) {
+            vkDownloadManager.downloadPost(arg);
         }
     }
     

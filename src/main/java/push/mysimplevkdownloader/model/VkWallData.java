@@ -6,7 +6,6 @@
 package push.mysimplevkdownloader.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -15,36 +14,50 @@ import java.util.Date;
 public class VkWallData {
     
     private final String ownerName;
-    private final Date creationDate;
-//    private final String creationDateString;
-//    private final String folderTitle; 
-//    private final ArrayList<String> photoUrlList;
-//    private final ArrayList<AudioTrack> audioTrackList;
+    private final long creationDate;
+    private final ArrayList<String> photoUrlList;
+    private final ArrayList<VkAudioRecording> audioRecordingList;
     private final String postText;
     
     
     
     public static class Builder {
         private String ownerName;
-        private Date creationDate;
-//        private ArrayList<String> photoUrlList;
-//        private final ArrayList<AudioTrack> audioTrackList;
+        private long creationDate;
+        private ArrayList<String> photoUrlList;
+        private ArrayList<VkAudioRecording> audioRecordingList;
         private String postText;
         
-        public Builder() { }
+        public Builder() { 
+            ownerName = "unknown";
+            creationDate = 0;
+            photoUrlList = new ArrayList<>();
+            audioRecordingList = new ArrayList<>();
+            postText = "empty";
+        }
         
         public Builder ownerName(String val) {
             ownerName = val;
             return this;
         }
         
-        public Builder creationDate(Date val) {
+        public Builder creationDate(long val) {
             creationDate = val;
             return this;
         }
         
         public Builder postText(String val) {
             postText = val;
+            return this;
+        }
+        
+        public Builder photoUrlList(ArrayList<String> val) {
+            photoUrlList = val;
+            return this;
+        }
+        
+        public Builder audioRecordingList(ArrayList<VkAudioRecording> val) {
+            audioRecordingList = val;
             return this;
         }
         
@@ -55,10 +68,40 @@ public class VkWallData {
     
     
     
-    VkWallData(Builder builder) {
+    private VkWallData(Builder builder) {
         ownerName = builder.ownerName;
         creationDate = builder.creationDate;
         postText = builder.postText;
+        photoUrlList = builder.photoUrlList;
+        audioRecordingList = builder.audioRecordingList;
+    }
+    
+    public String getOwnerName() {
+        return ownerName;
+    }
+    
+    public long getCreationDate() {
+        return creationDate;
+    }
+    
+    public String getPostText() {
+        return postText;
+    }
+    
+    public int getPhotosCount() {
+        return photoUrlList.size();
+    }
+    
+    public String getPhotoUrl(int index) {
+        return photoUrlList.get(index);
+    }
+    
+    public int getAudioRecordingsCount() {
+        return audioRecordingList.size();
+    }
+    
+    public VkAudioRecording getAudioRecord(int index) {
+        return audioRecordingList.get(index);
     }
     
 }

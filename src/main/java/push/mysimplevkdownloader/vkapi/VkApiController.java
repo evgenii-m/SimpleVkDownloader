@@ -51,7 +51,6 @@ public class VkApiController {
         int responseCode = makeHttpRequest(vkApiHttpConnection, "POST");
         if (responseCode == HttpURLConnection.HTTP_OK) {
             response = readHttpResponse(vkApiHttpConnection);
-            System.out.println(response);
         } else {
             throw new HTTPException(responseCode);
         }

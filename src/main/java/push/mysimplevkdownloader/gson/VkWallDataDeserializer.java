@@ -7,7 +7,8 @@ package push.mysimplevkdownloader.gson;
 
 import com.google.gson.*;
 import java.lang.reflect.Type;
-import java.util.Date;
+import java.util.ArrayList;
+import push.mysimplevkdownloader.model.VkAudioRecording;
 import push.mysimplevkdownloader.model.VkWallData;
 
 /**
@@ -22,18 +23,38 @@ public class VkWallDataDeserializer implements JsonDeserializer<VkWallData> {
     {
         JsonObject wallContent = json.getAsJsonObject().getAsJsonArray("wall").get(0).getAsJsonObject();
         JsonObject ownerInfo = json.getAsJsonObject().getAsJsonArray("groups").get(0).getAsJsonObject();
+        JsonArray attachments = wallContent.getAsJsonObject().getAsJsonArray("attachments");
+        
+        // add deserializer for VkAudioRecording class
+        Gson gson = new GsonBuilder().registerTypeAdapter(
+                    VkAudioRecording.class, new VkAudioRecordingDeserializer()).create();
         
         // read all necessary data from JSON objects, put them in order ...
         String ownerName = ownerInfo.get("screen_name").getAsString();
-        Date creationDate = new Date(wallContent.get("date").getAsLong() * 1000);  // adduce to ms.
+        long creationDate = wallContent.get("date").getAsLong() * 1000;  // adduce to ms.
         String postText = wallContent.get("text").getAsString()
                 .replaceAll(";amp", "&").replaceAll("<br>", "\n");
+        ArrayList<String> photoUrlList = new ArrayList<>();
+        ArrayList<VkAudioRecording> audioRecordingList = new ArrayList<>();
+        for (JsonElement attach : attachments) {
+            JsonObject attachObj = attach.getAsJsonObject();
+            String attachType = attachObj.get("type").getAsString();
+            if (attachType.equals("photo")) {
+                photoUrlList.add(attachObj.getAsJsonObject("photo").get("src_big").getAsString());
+            } else if (attachType.equals("audio")) {
+                VkAudioRecording audio = gson.fromJson(attachObj.getAsJsonObject("audio"), 
+                        VkAudioRecording.class);
+                audioRecordingList.add(audio);
+            }
+        }
                 
         // ... and build vkWallDataObjects
         VkWallData.Builder vkWallDataBuilder = new VkWallData.Builder()
                 .ownerName(ownerName)
                 .creationDate(creationDate)
-                .postText(postText);
+                .postText(postText)
+                .photoUrlList(photoUrlList)
+                .audioRecordingList(audioRecordingList);
         
         return vkWallDataBuilder.build();
     }
